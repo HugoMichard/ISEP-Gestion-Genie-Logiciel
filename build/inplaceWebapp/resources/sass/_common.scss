@@ -1,0 +1,166 @@
+html {
+  height: 100%;
+}
+
+body {
+  background: $background-color;
+  color: $font-color;
+  font-family: $font-family;
+  height: 100%;
+}
+
+a {
+  color: $primary-color;
+  outline: none;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-color-light;
+    text-decoration: none;
+  }
+}
+
+/*!
+ * Menu column
+**/
+
+.col-menu {
+  @include fixed(top 0 left 0 bottom 0);
+  @include transition(left .3s ease-in-out);
+
+  background: $col-background-color;
+  color: $col-font-color;
+  min-height: 100%;
+  overflow: auto;
+  width: $col-menu-width;
+  z-index: 1000;
+
+  a,
+  &:focus {
+    color: inherit;
+  }
+
+  .col-menu-inner {
+    @include relative;
+
+    min-height: 100%;
+  }
+
+  .top-logo {
+    padding: 15px;
+    text-align: center;
+
+    img {
+      width: 250px;
+    }
+  }
+
+  @include breakpoint('medium', 'max') {
+    left: -$col-menu-width;
+
+    .menu-opened {
+      .col-menu {
+        left: 0;
+      }
+    }
+  }
+
+  .menu-opened & {
+    @include breakpoint('medium', 'max') {
+      left: 0;
+    }
+  }
+
+  .apps-menu {
+    @include list-reset;
+    padding: 0 0 50px;
+
+    li {
+      .app-link {
+        display: block;
+        padding: 10px 20px;
+
+        &:hover {
+          background: #212734;
+        }
+      }
+
+      &.active {
+        .app-link {
+          background: #39455F;
+          border-left: 5px solid $primary-color;
+          padding-left: 15px;
+        }
+      }
+    }
+  }
+}
+
+/*!
+ * Content column
+**/
+
+.col-content {
+  @include transition(margin-left .3s ease-in-out, transform .3s ease-in-out);
+
+  margin-left: $col-menu-width;
+
+  @include breakpoint('medium', 'max') {
+    margin-left: 0;
+  }
+
+  .menu-opened & {
+    @include breakpoint('medium', 'max') {
+      @include transform(translate3d($col-menu-width, 0, 0));
+    }
+  }
+
+  .page-head {
+    @include size(100%, 50px);
+    @include fixed;
+    @include transition(padding-left .3s ease-in-out);
+
+    background: $primary-color;
+    color: $white;
+    left: 0;
+    padding-left: $col-menu-width;
+    top: 0;
+    z-index: 900;
+
+    @include breakpoint('medium', 'max') {
+      padding-left: 0;
+    }
+
+    .toolbar-box {
+      float: left;
+      padding: 6px 0 0 10px;
+
+      .btn {
+        background: $secondary-color;
+        border: 1px solid transparent;
+        border-radius: 0;
+        color: $white;
+
+        &:hover,
+        &:focus {
+          border-color: $white;
+        }
+      }
+    }
+
+    .userbox {
+      button {
+        background: $secondary-color;
+        border: 0;
+        line-height: 30px;
+        padding: 10px 20px;
+      }
+    }
+
+    @include clearfix;
+  }
+
+  .content {
+    padding: 75px 15px 15px;
+  }
+}
